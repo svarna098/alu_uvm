@@ -4,7 +4,7 @@ class env extends uvm_env;
  input_agent inp_agt_h;
  output_agent out_agt_h;
  scoreboard sb_h;
-
+ alu_sub subscb;
  alu_config m_cfg;
 
  function new(string name="env",uvm_component parent);
@@ -20,6 +20,7 @@ class env extends uvm_env;
   inp_agt_h=input_agent::type_id::create("inp_agt_h",this);
   out_agt_h=output_agent::type_id::create("out_agt_h",this);
   sb_h=scoreboard::type_id::create("sb_h",this);
+  subscb=alu_sub::type_id::create("subscb",this);
 
  endfunction
 
@@ -27,6 +28,7 @@ class env extends uvm_env;
 	super.connect_phase(phase);
 	inp_agt_h.mon_h.inp_monitor_port.connect(sb_h.inp_mon_fifo.analysis_export);
 	out_agt_h.mon_h.out_monitor_port.connect(sb_h.out_mon_fifo.analysis_export);
+       inp_agt_h.mon_h.inp_monitor_port.connect(subscb.analysis_export);
  endfunction
 
 endclass
@@ -34,5 +36,4 @@ endclass
 
 	
   
-
 
