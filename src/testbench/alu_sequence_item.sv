@@ -10,11 +10,11 @@ class trans extends uvm_sequence_item;
  	logic rst,err,oflow,cout,G,E,L;
  
 
- constraint c0{ce dist{1:=90};}
+ //constraint c0{ce dist{1:=70};}
  constraint c1{OA inside {[1:500]};}
  constraint c2{OB inside {[1:500]};}
  // constraint c3{inp_valid dist {2'b00 :=5, 2'b01 :=5, 2'b10 :=5, 2'b11 :=500};}
- constraint c4{mode dist{1'b1:=5,1'b0:=5};}
+// constraint c4{mode dist{1'b1:=5,1'b0:=5};}
  constraint c5{if(mode==1)
 		cmd<11;
 		else
@@ -32,5 +32,4 @@ class trans extends uvm_sequence_item;
 
 
  endclass
-
 
