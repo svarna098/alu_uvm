@@ -12,7 +12,7 @@ class seq extends uvm_sequence #(trans);
 	begin
 		for(int i=0;i<=8 ;i=i+1) begin
 		   start_item(req);
-		   assert(req.randomize() with {mode==1'b1;cmd==i;OA=='d3;OB=='d3; inp_valid ==2'b11;});
+		   assert(req.randomize() with {mode==1'b1;cmd==i;OA=='d3;OB=='d3; inp_valid ==2'b11;ce==1'b1;});
 		   finish_item(req);  end
 	end  
  endtask
@@ -32,7 +32,7 @@ class seq_1 extends uvm_sequence #(trans);
 	begin
 		for(int i=0;i<=13;i=i+1) begin
 		   start_item(req);
-		   assert(req.randomize() with {mode==1'b0;cmd==i;OA=='d10;OB=='d5;inp_valid ==2'b11;});
+		   assert(req.randomize() with {mode==1'b0;cmd==i;OA=='d10;OB=='d5;inp_valid ==2'b11;ce==1'b1;});
 		   finish_item(req);  end
 	end
  endtask
@@ -52,7 +52,7 @@ class mul_seq extends uvm_sequence #(trans);
 	begin
 		for(int i=9 ;i<=10;i=i+1) begin
 		   start_item(req);
-		   assert(req.randomize() with {mode==1'b1;cmd==i;OA=='d10;OB=='d5;inp_valid==3'd3;});
+		   assert(req.randomize() with {mode==1'b1;cmd==i;OA=='d10;OB=='d5;inp_valid==3'd3;ce==1'b1;});
 		   finish_item(req); #30;end
 	end
  endtask
@@ -72,7 +72,7 @@ class err_seq extends uvm_sequence #(trans);
        req=trans::type_id::create("req");
 	begin
 		   start_item(req);
-		   assert(req.randomize() with {mode==1'b0;cmd==4'b1100;OA=='d100;OB=='b10000001;inp_valid ==3'd3;});
+		   assert(req.randomize() with {mode==1'b0;cmd==4'b1100;OA=='d100;OB=='b10000001;inp_valid ==3'd3;ce==1'b1;});
 		   finish_item(req);
 	end
  endtask
@@ -93,7 +93,7 @@ class wait_seq extends uvm_sequence #(trans);
 		for(int j=0;j<=8;j=j+1)begin
 		for(int i=0;i<=2;i=i+1) begin
 		   start_item(req);
-		   assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;});
+		   assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;ce==1'b1;});
 		   finish_item(req);#50;end end
 	end
  endtask
@@ -113,7 +113,7 @@ endclass
 		for(int j=0;j<=8;j=j+1)begin
 		for(int i=0;i<=2;i=i+1) begin
 		   start_item(req);
-		   assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;});
+		   assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;ce==1'b1;});
 		   finish_item(req);#170;end end
 	end
  endtask
@@ -133,7 +133,7 @@ class wait_seq_logical extends uvm_sequence #(trans);
 		for(int j=0;j<=13;j=j+1)begin
 		for(int i=0;i<=2;i=i+1) begin
 		   start_item(req);
-		   assert(req.randomize() with {mode==1'b0;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;});
+		   assert(req.randomize() with {mode==1'b0;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;ce==1'b1;});
 		   finish_item(req);#50;end end
 	end
  endtask
@@ -153,7 +153,7 @@ class wait_seq_logical_err extends uvm_sequence #(trans);
 		for(int j=0;j<=13;j=j+1)begin
 		for(int i=0;i<=2;i=i+1) begin
 		   start_item(req);
-		   assert(req.randomize() with {mode==1'b0;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;});
+		   assert(req.randomize() with {mode==1'b0;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;ce==1'b1;});
 		   finish_item(req);#50;end end
 	end
  endtask
@@ -173,7 +173,7 @@ class wait_seq_mul extends uvm_sequence #(trans);
 		for(int j=9;j<=10;j=j+1)begin
 		for(int i=0;i<=2;i=i+1) begin
 		   start_item(req);
-		   assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;});
+		   assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;ce==1'b1;});
 		   finish_item(req);#50;end end
 	end
  endtask
@@ -193,7 +193,7 @@ endclass
 		for(int j=9;j<=10;j=j+1)begin
 		for(int i=0;i<=2;i=i+1) begin
 		   start_item(req);
-		   assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;});
+		   assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;ce==1'b1;});
 		   finish_item(req);#170;end end
 	end
  endtask
@@ -211,9 +211,9 @@ class wait_seq_logical1 extends uvm_sequence #(trans);
        req=trans::type_id::create("req");
 	begin
 		for(int j=0;j<=13;j=j+1)begin
-		for(int i=1;i>=0;i=i-1) begin
+		for(int i=2;i>=0;i=i-1) begin
 		   start_item(req);
-		   assert(req.randomize() with {mode==1'b0;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;});
+		   assert(req.randomize() with {mode==1'b0;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;ce==1'b1;});
 		   finish_item(req);#50;end end
 	          
 		  
@@ -233,9 +233,9 @@ class wait_seq1 extends uvm_sequence #(trans);
        req=trans::type_id::create("req");
 	begin
 		for(int j=0;j<=8;j=j+1)begin
-		for(int i=1;i>=0;i=i-1) begin
+		for(int i=2;i>=0;i=i-1) begin
 		   start_item(req);
-		   assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;});
+		   assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='b10;inp_valid ==i;ce==1'b1;});
 		   finish_item(req);#50;end end
 	end
  endtask
@@ -254,7 +254,7 @@ task body();
 		begin
 			for(int j=0;j<=8;j=j+1)begin
 				start_item(req);
-				assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='d10;inp_valid==2'b11;});
+				assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='d10;inp_valid==2'b11;ce==1'b1;});
 				finish_item(req);#170;
 			end
 		end
@@ -275,7 +275,7 @@ task body();
 		begin
 			for(int j=0;j<=8;j=j+1)begin
 			start_item(req);
-			assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='d10;inp_valid==2'b10;});
+			assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='d10;inp_valid==2'b10;ce==1'b1;});
 			finish_item(req);#170;
 		end
 	end
@@ -296,7 +296,7 @@ task body();
 		begin
 		for(int j=0;j<=8;j=j+1)begin
 			start_item(req);
-			assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='d10;inp_valid==2'b01;});
+			assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='d10;inp_valid==2'b01;ce==1'b1;});
 			finish_item(req);#170;
 		end
 	end
@@ -317,7 +317,7 @@ task body();
 		begin
 		for(int j=0;j<=8;j=j+1)begin
 			start_item(req);
-			assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='d10;inp_valid==2'b00;});
+			assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='d10;inp_valid==2'b00;ce==1'b1;});
 			finish_item(req);#170;
 			end
 		end
@@ -340,7 +340,7 @@ task body();
 	for(int j=0;j<=13;j=j+1)begin
 	for(int i=0;i<=3;i=i+1) begin
 		start_item(req);
-		assert(req.randomize() with {mode==1'b0;cmd==j;OA=='d5;OB=='d10;inp_valid==i;});
+		assert(req.randomize() with {mode==1'b0;cmd==j;OA=='d5;OB=='d10;inp_valid==i;ce==1'b1;});
 		finish_item(req);#50;end 
 
 		end
@@ -363,7 +363,7 @@ task body();
 	for(int j=9;j<=10;j=j+1)begin
 	for (int i=0;i<=3;i=i+1) begin
 		start_item(req);
-		assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='d10;inp_valid==i;});
+		assert(req.randomize() with {mode==1'b1;cmd==j;OA=='d5;OB=='d10;inp_valid==i;ce==1'b1;});
 		finish_item(req);#50;end
 
 		end
@@ -371,7 +371,7 @@ task body();
 endtask
 endclass
 
-/*
+
 class high_bit_ob_seq extends uvm_sequence #(trans);
 `uvm_object_utils(high_bit_ob_seq)
 
@@ -387,15 +387,167 @@ task body();
 	for (int i=12;i<=13;i=i+1) begin
 	
 		start_item(req);
-		assert(req.randomize() with {mode==1'b1;cmd==i;OA=='d5;OB==8'b00010000;inp_valid==2'b11;});
+		assert(req.randomize() with {mode==1'b0;cmd==i;OA=='d5;OB==8'b00010000;inp_valid==2'b11;ce==1'b1;});
+		finish_item(req);#50;
+		start_item(req);
+		assert(req.randomize() with {mode==1'b0;cmd==i;OA=='d5;OB==8'b00100000;inp_valid==2'b11;ce==1'b1;});
+		finish_item(req);#50;
+		start_item(req);
+		assert(req.randomize() with {mode==1'b0;cmd==i;OA=='d5;OB==8'b01000000;inp_valid==2'b11;ce==1'b1;});
+		finish_item(req);#50;
+		start_item(req);
+		assert(req.randomize() with {mode==1'b0;cmd==i;OA=='d5;OB==8'b10000000;inp_valid==2'b11;ce==1'b1;});
 		finish_item(req);#50;end
+end
 
 
-	end
+	
 endtask
-endclass */
+endclass 
+
+
+class ce_low_mul extends uvm_sequence #(trans);
+`uvm_object_utils(ce_low_mul)
+
+function new(string name="ce_low_mul");
+super.new(name);
+endfunction
+
+task body();
+	trans req;
+	req=trans::type_id::create("req");
+	begin
+
+	for (int i=12;i<=13;i=i+1) begin
+	
+		start_item(req);
+		assert(req.randomize() with {mode==1'b0;cmd==i;OA=='d5;OB==8'b00010000;inp_valid==2'b11;ce==1'b0;});
+		finish_item(req);#50;
+		start_item(req);
+		assert(req.randomize() with {mode==1'b0;cmd==i;OA=='d5;OB==8'b00100000;inp_valid==2'b11;ce==1'b0;});
+		finish_item(req);#50;
+		start_item(req);
+		assert(req.randomize() with {mode==1'b0;cmd==i;OA=='d5;OB==8'b01000000;inp_valid==2'b11;ce==1'b0;});
+		finish_item(req);#50;
+		start_item(req);
+		assert(req.randomize() with {mode==1'b0;cmd==i;OA=='d5;OB==8'b10000000;inp_valid==2'b11;ce==1'b0;});
+		finish_item(req);#50;end
+end
+
+
+	
+endtask
+endclass 
+
+
+class seq_ce_low extends uvm_sequence #(trans);
+	`uvm_object_utils(seq_ce_low) 
+
+ function new(string name="seq_ce_low");
+	super.new(name);
+ endfunction
+
+ task body();
+     
+      trans req;
+       req=trans::type_id::create("req");
+	begin
+		for(int i=0;i<=8 ;i=i+1) begin
+		   start_item(req);
+		   assert(req.randomize() with {mode==1'b1;cmd==i;OA=='d3;OB=='d3; inp_valid ==2'b11;ce==1'b0;});
+		   finish_item(req);  end
+	end  
+ endtask
+
+ endclass
+
+class seq_1_ce_low extends uvm_sequence #(trans);
+	`uvm_object_utils(seq_1_ce_low) 
+
+ function new(string name="seq_1_ce_low");
+	super.new(name);
+ endfunction
+
+ task body();
+	 trans req;
+       req=trans::type_id::create("req");
+	begin
+		for(int i=0;i<=13;i=i+1) begin
+		   start_item(req);
+		   assert(req.randomize() with {mode==1'b0;cmd==i;OA=='d10;OB=='d5;inp_valid ==2'b11;ce==1'b0;});
+		   finish_item(req);  end
+	end
+ endtask
+endclass
 
 
 
+class fec_xor_seq extends uvm_sequence #(trans);
+  `uvm_object_utils(fec_xor_seq)
+
+  function new(string name="fec_xor_seq");
+    super.new(name);
+  endfunction
+
+  task body();
+    trans req;
+    req = trans::type_id::create("req");
 
 
+    start_item(req);
+    assert(req.randomize() with { mode== 1'b0;cmd == 0;OA == 8'd5; OB== 8'd10;inp_valid == 2'b01;ce== 1'b1;});
+    finish_item(req);
+
+    #20;
+
+    start_item(req);
+    assert(req.randomize() with { mode== 1'b0;cmd  == 0;OA == 8'd5;OB == 8'd10;inp_valid == 2'b10;ce== 1'b1;});
+    finish_item(req);
+
+    #20;
+
+  endtask
+endclass
+
+class fec_valid_01 extends uvm_sequence #(trans);
+  `uvm_object_utils(fec_valid_01)
+
+  function new(string name="fec_valid_01");
+    super.new(name);
+  endfunction
+
+  task body();
+    trans req;
+    req = trans::type_id::create("req");
+
+    start_item(req);
+    assert(req.randomize() with { mode == 1'b0;cmd== 0; OA== 8'd5;OB== 8'd10; inp_valid == 2'b01; ce== 1'b1;});
+    finish_item(req);
+
+    #20;
+
+  endtask
+endclass
+
+class wait_seq_oprd extends uvm_sequence #(trans);
+  `uvm_object_utils(wait_seq_oprd)
+
+  function new(string name="wait_seq_oprd");
+    super.new(name);
+  endfunction
+
+  task body();
+    trans req;
+    req = trans::type_id::create("req");
+
+    start_item(req);
+    assert(req.randomize() with {mode== 1'b1;cmd == 0; OA == 8'd5;OB== 8'd10;inp_valid == 2'b01;ce == 1'b1;});
+    finish_item(req);
+    
+    #170;
+    start_item(req);
+    assert(req.randomize() with {mode == 1'b1;cmd == 0;OA== 8'd5;OB  == 8'd10;inp_valid == 2'b10; ce  == 1'b1;});
+    finish_item(req);
+
+  endtask
+endclass         
