@@ -47,4 +47,3 @@ modport OUT_MON(clocking out_mon_cb);
 
 endinterface
 
-
